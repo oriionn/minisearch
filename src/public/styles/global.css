@@ -1,0 +1,38 @@
+@import url(https://fonts.bunny.net/css?family=albert-sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i);
+
+* {
+    padding: 0;
+    margin: 0;
+
+    font-family: 'Albert Sans', sans-serif;
+}
+
+body {
+    width: 100dvw;
+    height: 100dvh;
+    background: #121217;
+    color: white;
+}
+
+form.search {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+input {
+    padding: 10px;
+    background: transparent;
+    color: white;
+    border: white 1px dotted;
+    border-radius: 10px;
+    outline: none;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+input:hover {
+    border-style: solid;
+}

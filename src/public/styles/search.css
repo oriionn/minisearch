@@ -1,0 +1,33 @@
+@import url(/public/styles/global.css);
+
+.container {
+    padding: 20px 50px;
+}
+
+form.search input[type="text"] {
+    width: 350px;
+}
+
+.results {
+    margin-top: 10px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    width: 500px;
+    text-decoration-color: transparent;
+}
+
+.result:hover {
+    text-decoration-style: dotted;
+    text-decoration-color: white;
+}
+
+.result .title {
+    font-size: 20px;
+}

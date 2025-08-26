@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Meta Search Engine - {{.Query}}</title>
+
+	<link rel="stylesheet" href="/public/styles/search.css">
+
+	<script src="/public/scripts/components.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <search-input value="{{.Query}}"></search-input>
+        </div>
+        <div class="results">
+            <a href="https://www.rust-lang.org/fr" class="result">
+                <span class="title">Le langage de programmation Rust</span>
+                <span class="description">Rust est terriblement rapide et économe en mémoire : sans environnement d'exécution, ni ramasse-miettes, il peut dynamiser des services à hautes performances, s ...</span>
+            </a>
+            <a href="https://store.steampowered.com/app/252490/Rust/" class="result">
+                <span class="title">Rust on Steam</span>
+                <span class="description">The only aim in Rust is to survive. Everything wants you to die - the island's wildlife, other inhabitants, the environment, and other survivors.</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
