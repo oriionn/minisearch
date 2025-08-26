@@ -15,7 +15,9 @@ var searchContent string
 type SearchPageData struct {
 	Query string
 	Results []search.SearchResult
+	Calculation bool
 }
+
 
 func Search(w http.ResponseWriter, r *http.Request) {
 	if (utils.DevMode()) {
@@ -53,8 +55,9 @@ func Search(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := SearchPageData{
-		Query: r.URL.Query().Get("q"),
+		Query: query,
 		Results: results,
+		Calculation: search.IsCalculation(query),
 	}
 
 	t.Execute(w, data)

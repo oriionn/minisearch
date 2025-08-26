@@ -25,7 +25,7 @@ func main() {
 		http.Handle("/public/", fileServer)
 	}
 
-	err := http.ListenAndServe(":3000", nil)
+	err := http.ListenAndServe("localhost:3000", nil)
 	if err != nil {
 		fmt.Printf("error: %s", err.Error())
 	}

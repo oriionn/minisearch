@@ -8,12 +8,20 @@
 	<link rel="stylesheet" href="/public/styles/search.css">
 
 	<script src="/public/scripts/components.js" defer></script>
+	{{ if .Calculation }}
+	    <script src="/public/scripts/calculation.js" defer></script>
+	{{ end }}
 </head>
 <body>
     <div class="container">
         <div class="head">
             <search-input value="{{.Query}}"></search-input>
         </div>
+        {{if .Calculation}}
+            <div class="calculation" >
+                <span id="result"></span>
+            </div>
+        {{end}}
         <div class="results">
             {{range .Results}}
                 <a href="{{.Link}}" class="result">
