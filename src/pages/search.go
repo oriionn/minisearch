@@ -31,10 +31,19 @@ func Search(w http.ResponseWriter, r *http.Request) {
 	}
 
 	query := r.URL.Query().Get("q")
-	results, err := search.Google(query)
+	results, err := search.Google(query, false)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
+	}
+	second_results, err := search.Google(query, true)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	for _, result := range second_results {
+		results = append(results, result)
 	}
 
 	t, err := template.New("search").Parse(searchContent)

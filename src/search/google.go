@@ -14,8 +14,13 @@ import (
 	"golang.org/x/text/transform"
 )
 
-func Google(query string) ([]SearchResult, error) {
-	fetchUrl := fmt.Sprintf("https://www.google.com/search?q=%s", url.QueryEscape(query))
+func Google(query string, second_page bool) ([]SearchResult, error) {
+	start := 0
+	if second_page {
+		start = 10
+	}
+
+	fetchUrl := fmt.Sprintf("https://www.google.com/search?q=%s&start=%d", url.QueryEscape(query), start)
 	req, err := http.NewRequest(http.MethodGet, fetchUrl, nil)
 	if err != nil {
 		return nil, err
