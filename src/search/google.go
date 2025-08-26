@@ -20,9 +20,7 @@ func Google(query string, second_page bool) ([]SearchResult, error) {
 		start = 10
 	}
 
-	q := query
-	q += GenerateDorks()
-
+	q := AddDorks(query)
 	fetchUrl := fmt.Sprintf("https://www.google.com/search?q=%s&start=%d", url.QueryEscape(q), start)
 	req, err := http.NewRequest(http.MethodGet, fetchUrl, nil)
 	if err != nil {
