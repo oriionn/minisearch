@@ -3,7 +3,9 @@ package pages
 import (
 	_ "embed"
 	"html/template"
+	"minisearch/src/utils"
 	"net/http"
+	"os"
 )
 
 //go:embed templates/search.html
@@ -14,6 +16,14 @@ type SearchPageData struct {
 }
 
 func Search(w http.ResponseWriter, r *http.Request) {
+	if (utils.DevMode()) {
+		contentBytes, err := os.ReadFile("src/pages/templates/search.html")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+		searchContent = string(contentBytes)
+	}
+
 	if !r.URL.Query().Has("q") {
 		http.Error(w, "No query provided", http.StatusBadRequest)
 	}

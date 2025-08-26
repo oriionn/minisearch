@@ -1,10 +1,9 @@
-@import url(https://fonts.bunny.net/css?family=albert-sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i);
-
+@import url(https://fonts.bunny.net/css?family=albert-sans:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|noto-color-emoji:400);
 * {
     padding: 0;
     margin: 0;
 
-    font-family: 'Albert Sans', sans-serif;
+    font-family: 'Albert Sans',  'Noto Color Emoji', sans-serif;
 }
 
 body {

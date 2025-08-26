@@ -4,6 +4,7 @@ import (
 	"embed"
 	"fmt"
 	"minisearch/src/pages"
+	"minisearch/src/utils"
 	"net/http"
 )
 
@@ -16,8 +17,13 @@ func main() {
 	http.HandleFunc("/search", pages.Search)
 
 	// Serve public files
-	fileServer := http.FileServer(http.FS(public))
-	http.Handle("/public/", fileServer)
+	if (utils.DevMode()) {
+		fileServer := http.FileServer(http.Dir("src/public"))
+		http.Handle("/public/", http.StripPrefix("/public/", fileServer))
+	} else {
+		fileServer := http.FileServer(http.FS(public))
+		http.Handle("/public/", fileServer)
+	}
 
 	err := http.ListenAndServe(":3000", nil)
 	if err != nil {
