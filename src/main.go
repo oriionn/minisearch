@@ -3,7 +3,7 @@ package main
 import (
 	"embed"
 	"fmt"
-	"meta-searchengine/src/pages"
+	"minisearch/src/pages"
 	"net/http"
 )
 
