@@ -3,6 +3,7 @@ package pages
 import (
 	_ "embed"
 	"html/template"
+	"minisearch/src/search"
 	"minisearch/src/utils"
 	"net/http"
 	"os"
@@ -13,6 +14,7 @@ var searchContent string
 
 type SearchPageData struct {
 	Query string
+	Results []search.SearchResult
 }
 
 func Search(w http.ResponseWriter, r *http.Request) {
@@ -28,6 +30,13 @@ func Search(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "No query provided", http.StatusBadRequest)
 	}
 
+	query := r.URL.Query().Get("q")
+	results, err := search.Google(query)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	t, err := template.New("search").Parse(searchContent)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -36,6 +45,7 @@ func Search(w http.ResponseWriter, r *http.Request) {
 
 	data := SearchPageData{
 		Query: r.URL.Query().Get("q"),
+		Results: results,
 	}
 
 	t.Execute(w, data)

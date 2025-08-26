@@ -10,7 +10,7 @@ form.search input[type="text"] {
 
 .results {
     margin-top: 10px;
-    gap: 10px;
+    gap: 25px;
     display: flex;
     flex-direction: column;
 }

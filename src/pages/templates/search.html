@@ -15,10 +15,12 @@
             <search-input value="{{.Query}}"></search-input>
         </div>
         <div class="results">
-            <a href="https://www.rust-lang.org/fr" class="result">
-                <span class="title">Le langage de programmation Rust</span>
-                <span class="description">Rust est terriblement rapide et économe en mémoire : sans environnement d'exécution, ni ramasse-miettes, il peut dynamiser des services à hautes performances, s ...</span>
-            </a>
+            {{range .Results}}
+                <a href="{{.Link}}" class="result">
+                    <span class="title">{{.Title}}</span>
+                    <span class="description">{{.Description}}</span>
+                </a>
+            {{end}}
             <a href="https://store.steampowered.com/app/252490/Rust/" class="result">
                 <span class="title">Rust on Steam</span>
                 <span class="description">The only aim in Rust is to survive. Everything wants you to die - the island's wildlife, other inhabitants, the environment, and other survivors.</span>
