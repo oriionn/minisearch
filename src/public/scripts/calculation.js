@@ -1,4 +1,5 @@
 let element = document.getElementById("result");
-let result = eval(document.querySelector(`input[name="q"]`).value);
+let query = document.querySelector(`input[name="q"]`)
+let result = eval(query.value);
 
 element.textContent = result;
