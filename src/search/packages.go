@@ -33,7 +33,10 @@ func Packages(query string) ([]SearchResult, error) {
 	}
 
 	var rawResults PackagesResponse
-	json.NewDecoder(res.Body).Decode(&rawResults)
+	err = json.NewDecoder(res.Body).Decode(&rawResults)
+	if err != nil {
+		return nil, err
+	}
 
 	results := []SearchResult{}
 	for _, result := range rawResults.Results {

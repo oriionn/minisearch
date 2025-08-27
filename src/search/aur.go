@@ -34,7 +34,10 @@ func AUR(query string) ([]SearchResult, error) {
 	}
 
 	var rawResults AURResponse
-	json.NewDecoder(res.Body).Decode(&rawResults)
+	err = json.NewDecoder(res.Body).Decode(&rawResults)
+	if err != nil {
+		return nil, err
+	}
 
 	slices.SortFunc(rawResults.Results, func (a, b AURResponseResult) int {
 		return cmp.Compare(b.Popularity, a.Popularity)

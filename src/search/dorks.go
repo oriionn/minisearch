@@ -36,10 +36,11 @@ func AddDorks(query string) string {
 				or = ")"
 			}
 
-			toReplace = fmt.Sprintf("%s site:%s %s", toReplace, domain, or)
+			toReplace = fmt.Sprintf("%s site:%s %s ", toReplace, domain, or)
 		}
 
 		dorks = strings.ReplaceAll(dorks, "!wiki", toReplace)
 	}
+
 	return dorks
 }

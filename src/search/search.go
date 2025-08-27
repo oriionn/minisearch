@@ -22,6 +22,15 @@ func Search(query string) ([]SearchResult, error) {
 		return results, nil
 	}
 
+	if strings.Contains(query, "!arch") {
+		query = strings.ReplaceAll(query, "!arch", "")
+		return Mediawiki(query, "wiki.archlinux.org", false)
+	}
+
+	if strings.Contains(query, "!wp") {
+		query = strings.ReplaceAll(query, "!wp", "")
+		return Mediawiki(query, "fr.wikipedia.org", true)
+	}
 
 	results, err := Google(query, false)
 	if err != nil {
