@@ -25,7 +25,12 @@
         <div class="results">
             {{range .Results}}
                 <a href="{{.Link}}" class="result">
-                    <span class="title">{{.Title}}</span>
+                    <div class="title">
+                        <div class="favicon">
+                            <img src="https://www.google.com/s2/favicons?domain={{.Domain}}&sz=64" />
+                        </div>
+                        <span>{{.Title}}</span>
+                    </div>
                     <span class="description">{{.Description}}</span>
                 </a>
             {{end}}

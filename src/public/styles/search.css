@@ -19,7 +19,7 @@ form.search input[type="text"] {
     display: flex;
     flex-direction: column;
     color: white;
-    width: 500px;
+    width: 550px;
     text-decoration-color: transparent;
 }
 
@@ -29,6 +29,26 @@ form.search input[type="text"] {
 }
 
 .result .title {
+    display: flex;
+    flex-direction: row;
+}
+
+.result .title .favicon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    margin-top: 2px;
+    margin-right: 5px;
+}
+
+.result .title .favicon img, .result .title .favicon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.result .title span {
     font-size: 20px;
 }
 

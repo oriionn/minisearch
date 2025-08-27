@@ -87,12 +87,14 @@ func Google(query string, second_page bool) ([]SearchResult, error) {
 
 		title := strings.TrimSpace(titleEl.Text())
 		description := strings.TrimSpace(descriptionEl.Text())
+		validUrl, u := utils.IsValidURL(link)
 
-		if title != "" && utils.IsValidURL(link) {
+		if title != "" && validUrl {
 			results = append(results, SearchResult{
 				Title: title,
 				Description: description,
 				Link: link,
+				Domain: u.Hostname(),
 			})
 		}
 	})
@@ -102,6 +104,7 @@ func Google(query string, second_page bool) ([]SearchResult, error) {
 
 var descriptionWordList []string = []string{
 	"Avis",
+	"En stock",
 }
 
 func IsValidDescription(description string) bool {
