@@ -16,7 +16,7 @@ A minimalist search engine that aims to match my personal use of a search engine
 
 ### CLI Params
 - `--port <port>` / `-p <port>`: Setting the port of the web server
-- `--dev`: Enter to dev mode
+- `--dev` / `-d`: Enter to dev mode (Update the front without restart the server)
 
 ## Installation
 ### Prerequisites
