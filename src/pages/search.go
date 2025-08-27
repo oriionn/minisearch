@@ -2,11 +2,13 @@ package pages
 
 import (
 	_ "embed"
+	"fmt"
 	"html/template"
 	"minisearch/src/search"
 	"minisearch/src/utils"
 	"net/http"
 	"os"
+	"strings"
 )
 
 //go:embed templates/search.html
@@ -33,6 +35,14 @@ func Search(w http.ResponseWriter, r *http.Request) {
 	}
 
 	query := r.URL.Query().Get("q")
+
+	if strings.Contains(query, "!google") {
+		query = strings.ReplaceAll(query, "!google", "")
+		query = search.AddDorks(query)
+		http.Redirect(w, r, fmt.Sprintf("https://www.google.com/search?q=%s", query), 302)
+		return
+	}
+
 	results, err := search.Search(query)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
