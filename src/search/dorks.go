@@ -18,6 +18,7 @@ var wikilist []string = []string{
 	"fr.wiktionary.org",
 	"lgbtqia.fandom.com",
 	"minecraft.wiki",
+	"wiki.archlinux.org",
 }
 
 func AddDorks(query string) string {
