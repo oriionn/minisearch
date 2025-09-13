@@ -2,7 +2,7 @@
 A minimalist search engine that aims to match my personal use of a search engine. It contains different sources of results, such as [Google](https://google.com), [ArchLinux Wiki](https://wiki.archlinux.org) and many others.
 
 ## Features
-- Remove unwanted sites (allocine.com, pinterest.com etc)
+- ~~Remove unwanted sites (allocine.com, pinterest.com etc)~~ (Removed because Google sucks)
 - Various bangs add different features
 - Simple calculations
 - CLI params
@@ -12,7 +12,7 @@ A minimalist search engine that aims to match my personal use of a search engine
 - `!package`: Searches for packages on the AUR and official Arch repositories.
 - `!arch`: Search the Arch Wiki.
 - `!wp`: Search on French Wikipedia
-- `!wiki`: Search on various wikis (English Wikipedia, French Wikipedia, ArchLinux Wiki etc)
+- ~~`!wiki`: Search on various wikis (English Wikipedia, French Wikipedia, ArchLinux Wiki etc)~~ (Removed because Google Sucks)
 
 ### CLI Params
 - `--port <port>` / `-p <port>`: Setting the port of the web server
