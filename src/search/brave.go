@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"minisearch/src/utils"
+
 	"net/http"
 	"net/url"
 	"regexp"
@@ -14,14 +15,15 @@ import (
 	"golang.org/x/text/transform"
 )
 
-func Google(query string, second_page bool) ([]SearchResult, error) {
+func Brave(query string, second_page bool) ([]SearchResult, error) {
 	start := 0
 	if second_page {
-		start = 10
+		start = 1
+		return nil, nil
 	}
 
-	q := AddDorks(query)
-	fetchUrl := fmt.Sprintf("https://www.google.com/search?q=%s&start=%d", url.QueryEscape(q), start)
+	// q := AddDorks(query)
+	fetchUrl := fmt.Sprintf("https://search.brave.com/search?q=%s&offset=%d", url.QueryEscape(query), start)
 	req, err := http.NewRequest(http.MethodGet, fetchUrl, nil)
 	if err != nil {
 		return nil, err
@@ -30,15 +32,7 @@ func Google(query string, second_page bool) ([]SearchResult, error) {
 	req.Header.Add("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
 	req.Header.Add("accept-language", "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3")
 	req.Header.Add("cache-control", "no-cache")
-	req.Header.Add("user-agent", utils.GetUserAgent())
-	req.AddCookie(&http.Cookie{
-		Name: "CONSENT",
-		Value: "PENDING+987",
-	})
-	req.AddCookie(&http.Cookie{
-		Name: "SOCS",
-		Value: "CAESHAgBEhIaAB",
-	})
+	req.Header.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36")
 
 	client := &http.Client{}
 	res, err := client.Do(req)
@@ -46,8 +40,9 @@ func Google(query string, second_page bool) ([]SearchResult, error) {
 		return nil, err
 	}
 
+
 	if res.StatusCode != 200 {
-		return nil, fmt.Errorf("Google responded with a %d status code", res.StatusCode)
+		return nil, fmt.Errorf("DDG responded with a %d status code", res.StatusCode)
 	}
 
 	var body io.Reader
@@ -63,35 +58,22 @@ func Google(query string, second_page bool) ([]SearchResult, error) {
 	}
 
 	results := []SearchResult{}
-	document.Find(".ezO2md").Each(func(i int, item *goquery.Selection) {
-		titleEl := item.Find(".CVA68e").First()
-		var descriptionEl *goquery.Selection
-		linkEl := item.Find("a").First()
-
-		item.Find(".FrIlee").Each(func (_ int, ii *goquery.Selection) {
-			if IsValidDescription(ii.Text()) && descriptionEl == nil {
-				descriptionEl = ii
-			}
-		})
-
-		if descriptionEl == nil {
-			descriptionEl = item.Find(".FrIlee").First()
-		}
-
-		link := linkEl.AttrOr("href", "")
+	document.Find("div.snippet:not(.standalone)").Each(func(i int, item *goquery.Selection) {
+		title := item.Find(".title").First()
+		a := item.Find("a")
+		link := a.AttrOr("href", "")
 		link = strings.ReplaceAll(strings.Split(link, "&")[0], "/url?q=", "")
 		unescaped, err := url.QueryUnescape(link)
 		if err == nil {
 			link = unescaped
 		}
+		description := item.Find(".snippet-description").Text()
 
-		title := strings.TrimSpace(titleEl.Text())
-		description := strings.TrimSpace(descriptionEl.Text())
-		validUrl, u := utils.IsValidURL(link)
+		isValid, u := utils.IsValidURL(link)
 
-		if title != "" && validUrl {
+		if title.Text() != "" && isValid {
 			results = append(results, SearchResult{
-				Title: title,
+				Title: title.Text(),
 				Description: description,
 				Link: link,
 				Domain: u.Hostname(),

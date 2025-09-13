@@ -21,11 +21,12 @@ var wikilist []string = []string{
 	"wiki.archlinux.org",
 }
 
+// Not works because I changed the SE (FUCK GOOGLE)
 func AddDorks(query string) string {
 	dorks := query
-	for _, domain := range blocklist {
+	/* for _, domain := range blocklist {
 		dorks = fmt.Sprintf("%s -site:%s", dorks, domain)
-	}
+		} */
 
 	if strings.Contains(query, "!wiki") {
 		toReplace := "("

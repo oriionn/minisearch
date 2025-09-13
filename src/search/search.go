@@ -32,12 +32,12 @@ func Search(query string) ([]SearchResult, error) {
 		return Mediawiki(query, "fr.wikipedia.org", true)
 	}
 
-	results, err := Google(query, false)
+	results, err := Brave(query, false)
 	if err != nil {
 		// http.Error(w, err.Error(), http.StatusInternalServerError)
 		return nil, err
 	}
-	second_results, err := Google(query, true)
+	second_results, err := Brave(query, true)
 	if err == nil {
 		for _, result := range second_results {
 			results = append(results, result)

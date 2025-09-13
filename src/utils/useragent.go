@@ -12,3 +12,9 @@ func GetUserAgent() string {
 	opensslVersion := fmt.Sprintf("OpenSSL/%d.%d.%d", Random(1, 3), Random(0, 4), Random(0, 9))
 	return fmt.Sprintf("%s %s %s %s", lynxVersion, libwwwVersion, sslmmVersion, opensslVersion)
 }
+
+
+func GetW3MUserAgent() string {
+	w3mVersion := fmt.Sprintf("w3m/0.5.%d", Random(1, 5))
+	return fmt.Sprintf("%s (Linux x86_64 fr)", w3mVersion)
+}
